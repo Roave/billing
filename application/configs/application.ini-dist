@@ -8,6 +8,12 @@ appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 
+resources.db.adapter = "pdo_mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "billing"
+resources.db.params.password = ""
+resources.db.params.dbname = "billing"
+
 [staging : production]
 
 [testing : production]
