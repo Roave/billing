@@ -1,0 +1,9 @@
+<?php
+$currency = new Zend_Currency();
+?>
+<tr>
+	<td><?php echo $this->product_id ?></td>
+	<td><?php echo $this->name ?></td>
+	<td><?php echo $this->description ?></td>
+	<td><?php echo $currency->setValue($this->unit_price) ?></td>
+</tr>

@@ -1,0 +1,9 @@
+<table>
+	<tr>
+		<th>Product ID</th>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Unit Price</th>
+	</tr>
+	<?php echo $this->partialLoop('products/partials/list-row.phtml', $this->products); ?>
+</table>
