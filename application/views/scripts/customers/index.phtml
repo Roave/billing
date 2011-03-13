@@ -1,0 +1,14 @@
+<table>
+	<tr>
+		<th>CustID</th>
+		<th>Name</th>
+		<th>Address</th>
+		<th>City</th>
+		<th>State</th>
+		<th>ZIP</th>
+		<th>Country</th>
+		<th>Phone</th>
+		<th>Fax</th>
+	</tr>
+	<?php echo $this->partialLoop('customers/partials/list-row.phtml', $this->customers); ?>
+</table>
