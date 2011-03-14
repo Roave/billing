@@ -1,0 +1,11 @@
+<table>
+	<tr>
+		<th>Invoice ID</th>
+		<th>Customer</th>
+		<th>Invoice Date</th>
+		<th>Due Date</th>
+		<th>Amount</th>
+		<th>Paid</th>
+	</tr>
+	<?php echo $this->partialLoop('invoices/partials/list-row.phtml', $this->invoices); ?>
+</table>
