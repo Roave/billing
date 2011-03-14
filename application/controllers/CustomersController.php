@@ -6,7 +6,7 @@
  * @author Ben Youngblood <bx.youngblood@gmail.com>
  */
 
-require "../application/models/Customers.php";
+require APPLICATION_PATH . '/models/Customers.php';
 
 class CustomersController extends Zend_Controller_Action {
 

@@ -6,7 +6,7 @@
  * @author Ben Youngblood <bx.youngblood@gmail.com>
  */
 
-require_once '../application/models/Products.php';
+require_once APPLICATION_PATH . '/models/Products.php';
 
 class ProductsController extends Zend_Controller_Action {
 
