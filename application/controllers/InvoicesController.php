@@ -29,4 +29,26 @@ class InvoicesController extends Zend_Controller_Action {
 		
 		$this->view->invoices = $invoiceData;
 	}
+
+	public function viewAction()
+	{
+		$invoicesTable = new Invoices();
+		$id = $this->_getParam('id');
+		
+		$invoice = $invoicesTable->find($id)
+			->current();
+		
+		$this->view->invoice = $invoice;
+		$this->view->customer = $invoice->findParentRow('Customers');
+		
+		$details = $invoice->findDependentRowset('InvoiceDetails');
+		$this->view->details = $details;
+		
+		$subtotal = 0;
+		foreach ($details as $d) {
+			$subtotal += $d->unit_price * $d->quantity;
+		}
+		
+		$this->view->subtotal = $subtotal;
+	}
 }

@@ -1,0 +1,46 @@
+<?php $currency = new Zend_Currency(); ?>
+<p>Bill To: <br />
+<?php
+echo $this->partial('address.phtml', 
+		array(
+			'name' => $this->customer->company, 
+			'address' => $this->customer->address, 
+			'address2' => $this->customer->address_2, 
+			'city' => $this->customer->city, 
+			'state' => $this->customer->state, 
+			'zip' => $this->customer->zip, 
+			'country' => $this->customer->country));
+?>
+</p>
+<table>
+	<thead>
+		<tr>
+			<th>Item</th>
+			<th>Unit Price</th>
+			<th>Quantity</th>
+			<th>Ext. Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+		echo $this->partialLoop('invoices/partials/detail-row.phtml', $this->details->toArray())?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">Subtotal</td>
+			<td><?php echo $currency->setValue($this->subtotal); ?></td>
+		</tr>
+		<tr>
+			<td colspan="3">Tax</td>
+			<td><?php echo $currency->setValue(0); ?></td>
+		</tr>
+		<tr>
+			<td colspan="3">Shipping</td>
+			<td><?php echo $currency->setValue(0); ?></td>
+		</tr>
+		<tr>
+			<td colspan="3">Total</td>
+			<td><?php echo $currency->setValue($this->subtotal); ?></td>
+		</tr>
+	</tfoot>
+</table>

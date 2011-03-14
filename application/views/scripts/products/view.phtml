@@ -1,3 +1,4 @@
+<?php $currency = new Zend_Currency(); ?>
 <style type="text/css">
 dt { font-weight: bold; }
 </style>
@@ -8,4 +9,4 @@ dt { font-weight: bold; }
 <dt>Description</dt>
 <dd><?php echo $this->product->description; ?></dd>
 <dt>Unit Price</dt>
-<dd><?php echo $this->product->unit_price; ?></dd>
+<dd><?php echo $currency->setValue($this->product->unit_price); ?></dd>
