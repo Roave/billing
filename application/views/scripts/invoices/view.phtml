@@ -1,4 +1,29 @@
-<?php $currency = new Zend_Currency(); ?>
+<script type="text/javascript">
+var productData = <?php echo json_encode($this->productData); ?>;
+</script>
+<script type="text/javascript">
+
+var updateExtPrice = function() {
+	$('#ext-price').html($('#quantity').val() * $('#unit-price').val());
+}
+
+$(document).ready(function() {
+	$('#product-name').change(function() {
+		var id = $('#product-name option:selected').val();
+		if (id != 0) {
+			$('#sku').val(productData[id].sku);
+			$('#unit-price').val(productData[id].unit_price);
+			updateExtPrice();
+		}
+	});
+
+	$('#unit-price').change(updateExtPrice);
+	$('#quantity').change(updateExtPrice);
+});
+</script>
+<?php
+$currency = new Zend_Currency();
+?>
 <p>Bill To: <br />
 <?php
 echo $this->partial('address.phtml', 
@@ -12,6 +37,11 @@ echo $this->partial('address.phtml',
 			'country' => $this->customer->country));
 ?>
 </p>
+<form
+	action="/invoices/update/id/<?php
+	echo $this->invoice->invoice_id?>"
+	method="post">
+<input type="hidden" name="do" value="add-line-item" />
 <table>
 	<thead>
 		<tr>
@@ -20,28 +50,59 @@ echo $this->partial('address.phtml',
 			<th>Unit Price</th>
 			<th>Quantity</th>
 			<th>Ext. Price</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<?php
 		echo $this->partialLoop('invoices/partials/detail-row.phtml', $this->details->toArray())?>
+		<tr>
+			<td><?php
+			echo $this->formText('sku', null, array(
+				'id' => 'sku'))?></td>
+			<td><?php
+			echo $this->formSelect('product', null, array(
+				'id' => 'product-name'), $this->products)?></td>
+			<td><?php
+			echo $this->formText('unit_price', null, array(
+				'id' => 'unit-price'))?></td>
+			<td><?php
+			echo $this->formText('quantity', 1, array(
+				'id' => 'quantity'))?></td>
+			<td><span id="ext-price"></span></td>
+			<td><?php
+			echo $this->formSubmit('submit', 'add')?></td>
+		</tr>
 	</tbody>
 	<tfoot>
 		<tr>
 			<td colspan="4">Subtotal</td>
-			<td><?php echo $currency->setValue($this->subtotal->subtotal); ?></td>
+			<td><?php
+			echo $currency->setValue($this->subtotal ? $this->subtotal->subtotal : 0);
+			?></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td colspan="4">Tax</td>
-			<td><?php echo $currency->setValue(0); ?></td>
+			<td><?php
+			echo $currency->setValue(0);
+			?></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td colspan="4">Shipping</td>
-			<td><?php echo $currency->setValue(0); ?></td>
+			<td><?php
+			echo $currency->setValue(0);
+			?></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td colspan="4">Total</td>
-			<td><?php echo $currency->setValue($this->subtotal->subtotal); ?></td>
+			<td><?php
+			echo $currency->setValue($this->subtotal ? $this->subtotal->subtotal : 0);
+			?></td>
+			<td></td>
 		</tr>
 	</tfoot>
 </table>
+</form>
