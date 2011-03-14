@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 CREATE TABLE IF NOT EXISTS `customer_products` (
   `product_id` int(10) unsigned NOT NULL,
-  `sku` varchar(30) DEFAULT NULL,
   `customer_id` int(10) unsigned NOT NULL,
+  `sku` varchar(30) DEFAULT NULL,
   `name` varchar(120) DEFAULT NULL,
   `description` text,
   `unit_price` float DEFAULT NULL COMMENT '		',
