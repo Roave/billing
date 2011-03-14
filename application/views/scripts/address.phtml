@@ -1,0 +1,7 @@
+<?php echo $this->name ?><br />
+<?php echo $this->address ?><br />
+<?php if (!is_null($this->address2) && $this->address2 != '') {
+echo $this->address2 . '<br />';
+} ?>
+<?php echo $this->city ?>, <?php echo $this->state ?> <?php echo $this->zip ?><br />
+<?php echo $this->country ?>
