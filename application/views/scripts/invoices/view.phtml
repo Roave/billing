@@ -15,6 +15,7 @@ echo $this->partial('address.phtml',
 <table>
 	<thead>
 		<tr>
+			<th>SKU</th>
 			<th>Item</th>
 			<th>Unit Price</th>
 			<th>Quantity</th>
@@ -27,19 +28,19 @@ echo $this->partial('address.phtml',
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="3">Subtotal</td>
+			<td colspan="4">Subtotal</td>
 			<td><?php echo $currency->setValue($this->subtotal->subtotal); ?></td>
 		</tr>
 		<tr>
-			<td colspan="3">Tax</td>
+			<td colspan="4">Tax</td>
 			<td><?php echo $currency->setValue(0); ?></td>
 		</tr>
 		<tr>
-			<td colspan="3">Shipping</td>
+			<td colspan="4">Shipping</td>
 			<td><?php echo $currency->setValue(0); ?></td>
 		</tr>
 		<tr>
-			<td colspan="3">Total</td>
+			<td colspan="4">Total</td>
 			<td><?php echo $currency->setValue($this->subtotal->subtotal); ?></td>
 		</tr>
 	</tfoot>

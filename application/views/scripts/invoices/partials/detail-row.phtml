@@ -1,5 +1,6 @@
 <?php $currency = new Zend_Currency(); ?>
 <tr>
+	<td><?php echo $this->sku; ?></td>
 	<td><?php echo $this->name; ?></td>
 	<td><?php echo $currency->setValue($this->unit_price); ?></td>
 	<td><?php echo $this->quantity; ?></td>

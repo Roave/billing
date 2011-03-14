@@ -106,6 +106,9 @@ class ProductsController extends Zend_Controller_Action {
 		$productId->setAttrib('disabled', 'disabled')
 			->setLabel('Product ID');
 		
+		$sku = new Zend_Form_Element_Text('sku');
+		$sku->setLabel('SKU');
+		
 		$name = new Zend_Form_Element_Text('name');
 		$name->setLabel('Product Name')
 			->setRequired(true);
@@ -129,6 +132,7 @@ class ProductsController extends Zend_Controller_Action {
 		}
 		
 		$form->addElement($productId)
+			->addElement($sku)
 			->addElement($name)
 			->addElement($desc)
 			->addElement($price)

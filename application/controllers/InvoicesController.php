@@ -51,6 +51,7 @@ class InvoicesController extends Zend_Controller_Action {
 
 	public function newAction()
 	{
-	
+		$invoicesTable = new Invoices();
+		
 	}
 }
