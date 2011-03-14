@@ -9,6 +9,7 @@
 require_once "../application/models/Invoices.php";
 require_once "../application/models/Customers.php";
 require_once "../application/models/InvoiceDetails.php";
+require_once "../application/models/InvoiceSubtotals.php";
 
 class InvoicesController extends Zend_Controller_Action {
 
@@ -23,7 +24,10 @@ class InvoicesController extends Zend_Controller_Action {
 			foreach ($invoices as $i) {
 				$customerData = $i->findParentRow('Customers');
 				$lineItems = $i->findDependentRowset('InvoiceDetails');
-				$invoiceData[] = array_merge($i->toArray(), $customerData->toArray(), $lineItems->toArray());
+				$subtotals = $i->findDependentRowset('InvoiceSubtotals')
+					->current();
+				
+				$invoiceData[] = array_merge($i->toArray(), $customerData->toArray(), $lineItems->toArray(), $subtotals->toArray());
 			}
 		}
 		
@@ -40,15 +44,13 @@ class InvoicesController extends Zend_Controller_Action {
 		
 		$this->view->invoice = $invoice;
 		$this->view->customer = $invoice->findParentRow('Customers');
-		
-		$details = $invoice->findDependentRowset('InvoiceDetails');
-		$this->view->details = $details;
-		
-		$subtotal = 0;
-		foreach ($details as $d) {
-			$subtotal += $d->unit_price * $d->quantity;
-		}
-		
-		$this->view->subtotal = $subtotal;
+		$this->view->details = $invoice->findDependentRowset('InvoiceDetails');
+		$this->view->subtotal = $invoice->findDependentRowset('InvoiceSubtotals')
+			->current();
+	}
+
+	public function newAction()
+	{
+	
 	}
 }

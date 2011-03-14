@@ -1,7 +1,9 @@
+<?php $currency = new Zend_Currency(); ?>
 <tr>
 	<td><?php echo $this->invoice_id ?></td>
 	<td><?php echo $this->company ?></td>
 	<td><?php echo $this->invoice_date ?></td>
 	<td><?php echo $this->due_date ?></td>
+	<td><?php echo $currency->setValue($this->subtotal) ?></td>
 	<td></td>
 </tr>
