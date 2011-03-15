@@ -101,6 +101,9 @@ class InvoicesController extends Zend_Controller_Action {
 			case 'add-line-item' :
 				$this->addLineItem();
 				break;
+			case 'remove-line-item':
+				$this->removeLineItem();
+				break;
 			default :
 				throw new Exception();
 				break;
@@ -114,6 +117,11 @@ class InvoicesController extends Zend_Controller_Action {
 		$productId = $this->_getParam('product');
 		$unitPrice = $this->_getParam('unit_price');
 		$quantity = $this->_getParam('quantity');
+		
+		if (!isset($productId) || $productId == 0) {
+			$this->_redirect('/invoices/view/id/' . $invoiceId);
+			return;
+		}
 		
 		$invoicesTable = new Invoices();
 		$invoice = $invoicesTable->find($invoiceId)
@@ -139,6 +147,21 @@ class InvoicesController extends Zend_Controller_Action {
 		$data['customer_id'] = $invoice->customer_id;
 		
 		$customerProductsTable->updateCustomerProduct($data);
+		
+		$this->_redirect('/invoices/view/id/' . $invoiceId);
+	}
+	
+	private function removeLineItem()
+	{
+		$invoiceId = $this->_getParam('id');
+		$lineItem = $this->_getParam('detail');
+		
+		$invoiceDetailsTable = new InvoiceDetails();
+		$detail = $invoiceDetailsTable->find($lineItem)->current();
+		
+		if ($detail->invoice_id == $invoiceId) {
+			$detail->delete();
+		}
 		
 		$this->_redirect('/invoices/view/id/' . $invoiceId);
 	}

@@ -1,5 +1,7 @@
 <script type="text/javascript">
-var productData = <?php echo json_encode($this->productData); ?>;
+var productData = <?php
+echo json_encode($this->productData);
+?>;
 </script>
 <script type="text/javascript">
 
@@ -40,8 +42,7 @@ echo $this->partial('address.phtml',
 <form
 	action="/invoices/update/id/<?php
 	echo $this->invoice->invoice_id?>"
-	method="post">
-<input type="hidden" name="do" value="add-line-item" />
+	method="post"><input type="hidden" name="do" value="add-line-item" />
 <table>
 	<thead>
 		<tr>

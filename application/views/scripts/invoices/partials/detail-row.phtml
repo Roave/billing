@@ -5,4 +5,5 @@
 	<td><?php echo $currency->setValue($this->unit_price); ?></td>
 	<td><?php echo $this->quantity; ?></td>
 	<td><?php echo $currency->setValue($this->unit_price * $this->quantity); ?></td>
+	<td><a href="/invoices/update/id/<?php echo $this->invoice_id ?>/detail/<?php echo $this->detail_id?>/do/remove-line-item">delete</a></td>
 </tr>
