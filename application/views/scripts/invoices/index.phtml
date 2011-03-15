@@ -1,11 +1,22 @@
 <table>
-	<tr>
-		<th>Invoice ID</th>
-		<th>Customer</th>
-		<th>Invoice Date</th>
-		<th>Due Date</th>
-		<th>Amount</th>
-		<th>Paid</th>
-	</tr>
-	<?php echo $this->partialLoop('invoices/partials/list-row.phtml', $this->invoices); ?>
+	<thead>
+		<tr>
+			<th>Invoice ID</th>
+			<th>Customer</th>
+			<th>Invoice Date</th>
+			<th>Due Date</th>
+			<th>Amount</th>
+			<th>Paid</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php
+	echo $this->partialLoop('invoices/partials/list-row.phtml', $this->invoices);
+	?>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="6"><a href="/invoices/new">Add a new invoice</a></td>
+		</tr>
+	</tfoot>
 </table>

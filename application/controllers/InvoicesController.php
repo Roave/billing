@@ -189,12 +189,16 @@ class InvoicesController extends Zend_Controller_Action {
 		$invoiceDate = new Zend_Form_Element_Text('invoice_date');
 		$invoiceDate->setRequired(true)
 			->setLabel('Invoice Date')
-			->addValidator(new Zend_Validate_Date());
+			->addValidator(new Zend_Validate_Date())
+			->setAttrib('class', 'date')
+			->setValue(date('Y-m-d'));
 		
 		$dueDate = new Zend_Form_Element_Text('due_date');
 		$dueDate->setRequired(true)
 			->setLabel('Due Date')
-			->addValidator(new Zend_Validate_Date());
+			->addValidator(new Zend_Validate_Date())
+			->setAttrib('class', 'date')
+			->setValue(date('Y-m-d', strtotime('+1 month')));
 		
 		$notes = new Zend_Form_Element_Textarea('notes');
 		$notes->setLabel('Notes');
